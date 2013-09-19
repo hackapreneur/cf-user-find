@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def new
   	@user = User.new
+    @user.build_license
   end
 
   def create
@@ -21,7 +22,10 @@ class UsersController < ApplicationController
 
   private
   def user_params
-  	params.require(:user).permit(:email, :name)
+  	params.require(:user).permit(
+      :email, :name,
+      license_attributes: [:number, :state]
+      )
   end
 
 

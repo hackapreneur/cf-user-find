@@ -1,5 +1,13 @@
 <h1>Users#new</h1>
 <%= form_for @user do |f| %>
+	<% if @users.errors.any? %>
+		<ul>
+			<% @user.errors.full_message.each do |msg| %>
+
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	<% end %>
 	<div>
 		<%= f.label :email  %>
 		<%= f.text_field :email  %>
@@ -9,7 +17,16 @@
 		<%= f.text_field :name  %>
 	</div>
 	<div>
-		<%= f.label :license  %>
+		<%= f.label :license do |license_builder|  %>
+			<div>
+			<%= f.label :number  %>
+			<%= f.text_field :number  %>
+			</div>
+			<div>
+			<%= f.label :state  %>
+			<%= f.text_field :state  %>
+			</div>
+		<% end %> 
 		
 	</div>
 
